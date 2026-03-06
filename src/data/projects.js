@@ -67,7 +67,7 @@ export const projects = [
   },
 
   {
-    title: "Payment Gateway Integration System",
+    title: "Payment Gateway App",
     description:
       "A secure payment processing module integrated with backend APIs to handle transactions, verify payments, and manage transaction records for digital services.",
     tech: [
