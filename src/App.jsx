@@ -4,6 +4,7 @@ import About from "./components/About";
 import Skills from "./components/Skills"; // add this
 import Projects from "./components/Projects";
 import Contact from "./components/Contact";
+import AIChatbot from "./components/AIChatbot";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Navbar />
       <Hero />
       <About />
+      <AIChatbot />
       <Skills /> {/* add this */}
       <Projects />
       <Contact />
