@@ -32,8 +32,8 @@ Thumbs.db
 *.ntvs*
 *.njsproj
 *.sln
-*.swp
-*.swo
+*.sw?
+.env
 
 # Local config
 *.local
