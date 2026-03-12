@@ -4,7 +4,7 @@ import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 
 export default function Hero() {
   return (
-    <section className="h-[90%] flex items-center justify-center px-6 bg-linear-to-b from-black via-gray-900 to-black text-white">
+    <section className="min-h-screen flex items-center justify-center px-6 bg-linear-to-b from-black via-gray-900 to-black text-white w-full">
 
       <div className="max-w-4xl text-center">
 

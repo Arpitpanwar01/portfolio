@@ -6,7 +6,7 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="py-24 px-6 bg-linear-to-b from-black to-gray-900 text-white"
+      className="py-24 px-6 bg-linear-to-b from-black to-gray-900 text-white w-full"
     >
       <div className="max-w-7xl mx-auto">
 
