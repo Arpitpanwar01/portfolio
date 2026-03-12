@@ -90,7 +90,7 @@ ${query}
         ...prev,
         {
           role: "bot",
-          text: "⚠️ AI connection error. Please try again.",
+          text: "⚠️ AI connection Busy. Please try again after sometime.",
         },
       ]);
     }
