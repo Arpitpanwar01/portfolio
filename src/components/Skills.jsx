@@ -16,10 +16,10 @@ export default function Skills() {
   return (
     <section
       id="skills"
-      className="py-24 px-6 bg-linear-to-b from-gray-900 to-black text-white"
+      className="py-24 px-6 bg-linear-to-b from-gray-900 to-black text-white w-full"
     >
 
-      <div className="max-w-6xl mx-auto text-center">
+      <div className="max-w-6xl mx-auto text-center w-full">
 
         <h2 className="text-4xl font-bold mb-4">
           Tech Stack ⚡

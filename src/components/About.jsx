@@ -4,7 +4,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="py-24 px-6 bg-gradient-to-b from-gray-900 to-black text-white"
+      className="py-24 px-6 bg-linear-to-b from-gray-900 to-black text-white w-full "
     >
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
 

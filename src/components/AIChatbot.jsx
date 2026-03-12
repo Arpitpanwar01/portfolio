@@ -62,7 +62,7 @@ export default function AIChatbot() {
 
     try {
       const model = genAI.getGenerativeModel({
-        model: "gemini-2.5-flash",
+        model: "gemini-2.0-flash",
       });
 
       const prompt = `
@@ -115,7 +115,7 @@ ${query}
           onClick={() => setOpen(true)}
           sx={{
             position: "fixed",
-            bottom: 30,
+            bottom: 50,
             right: 50,
             bgcolor: "#1976d2",
             color: "white",

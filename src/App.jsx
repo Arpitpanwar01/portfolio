@@ -8,11 +8,12 @@ import AIChatbot from "./components/AIChatbot";
 
 function App() {
   return (
-    <div className="bg-black text-white">
+    <div className="bg-black text-white h-screen w-screen">
+      <AIChatbot />
       <Navbar />
       <Hero />
       <About />
-      <AIChatbot />
+      
       <Skills /> {/* add this */}
       <Projects />
       <Contact />
