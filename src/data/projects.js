@@ -97,5 +97,33 @@ export const projects = [
     ],
     image:
       "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop"
-  }
+  },
+  {
+  title: "Netflix Clone (UI)",
+  description:
+    "A fully responsive Netflix-inspired UI built using pure HTML, CSS, and JavaScript. Features include dynamic layouts, movie banners, hover effects, and modern streaming platform design.",
+  tech: [
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "Responsive Design",
+    "UI/UX"
+  ],
+  image:
+    "https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?q=80&w=1200&auto=format&fit=crop"
+},
+{
+  title: "Spotify UI Clone",
+  description:
+    "A visually rich Spotify-inspired music player interface built with HTML, CSS, and JavaScript. Includes sidebar navigation, playlist UI, and modern dark-themed design.",
+  tech: [
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "UI Design",
+    "Responsive Layout"
+  ],
+  image:
+    "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=1200&auto=format&fit=crop"
+}
 ];

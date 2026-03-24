@@ -1,5 +1,6 @@
 import { useState } from "react";
 import emailjs from "@emailjs/browser";
+import { motion } from "framer-motion";
 import { FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
 
 export default function Contact() {
@@ -32,8 +33,7 @@ export default function Contact() {
           setForm({ name: "", email: "", message: "" });
           setLoading(false);
         },
-        (error) => {
-          console.log(error);
+        () => {
           alert("Something went wrong. Please try again.");
           setLoading(false);
         }
@@ -43,62 +43,74 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="py-24 px-6 bg-gradient-to-b from-black to-gray-900 text-white w-full"
+      className="relative py-24 px-6 text-white overflow-hidden"
     >
+      {/* 🌌 Background Glow */}
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-black to-gray-900">
+        <div className="absolute w-[400px] h-[400px] bg-green-500/10 blur-3xl rounded-full top-10 left-[-100px]" />
+        <div className="absolute w-[300px] h-[300px] bg-cyan-500/10 blur-3xl rounded-full bottom-10 right-[-100px]" />
+      </div>
+
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
 
         {/* LEFT SIDE */}
-
-        <div>
+        <motion.div
+          initial={{ opacity: 0, x: -60 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+        >
           <h2 className="text-4xl font-bold mb-6">
-            Let's Connect 👋
+            Let's{" "}
+            <span className="bg-gradient-to-r from-green-400 to-cyan-400 bg-clip-text text-transparent">
+              Connect
+            </span>{" "}
+            👋
           </h2>
 
           <p className="text-gray-400 mb-8">
-            I'm always open to discussing new projects,
-            collaborations, or opportunities.
+            Open for projects, collaborations, and opportunities.
+            Let’s build something amazing together.
           </p>
 
-          <div className="space-y-4">
+          <div className="space-y-5">
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 hover:text-green-400 transition">
               <FaEnvelope className="text-green-400" />
               <span>arpitpanwar971@gmail.com</span>
             </div>
 
-            <div className="flex items-center gap-3">
+            <a
+              href="https://github.com/Arpitpanwar01"
+              target="_blank"
+              className="flex items-center gap-3 hover:text-green-400 transition"
+            >
               <FaGithub className="text-green-400" />
-              <a
-                href="https://github.com/Arpitpanwar01"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-green-400"
-              >
-                github.com/Arpitpanwar01
-              </a>
-            </div>
+              github.com/Arpitpanwar01
+            </a>
 
-            <div className="flex items-center gap-3">
+            <a
+              href="https://linkedin.com/in/arpit-panwar-537a34323"
+              target="_blank"
+              className="flex items-center gap-3 hover:text-green-400 transition"
+            >
               <FaLinkedin className="text-green-400" />
-              <a
-                href="https://linkedin.com/in/arpit-panwar-537a34323"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-green-400"
-              >
-                linkedin.com/in/arpit-panwar-537a34323
-              </a>
-            </div>
+              linkedin.com/in/arpit-panwar
+            </a>
 
           </div>
-        </div>
+        </motion.div>
 
         {/* RIGHT SIDE FORM */}
-
-        <form
+        <motion.form
           onSubmit={handleSubmit}
-          className="bg-white/5 backdrop-blur-lg border border-white/10 p-8 rounded-2xl space-y-5"
+          initial={{ opacity: 0, x: 60 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+          className="relative bg-white/5 backdrop-blur-xl border border-white/10 p-8 rounded-2xl space-y-6 shadow-xl"
         >
+
+          {/* Glow border */}
+          <div className="absolute inset-0 rounded-2xl border border-green-400/10 pointer-events-none" />
 
           <input
             type="text"
@@ -107,7 +119,7 @@ export default function Contact() {
             value={form.name}
             onChange={handleChange}
             required
-            className="w-full p-3 rounded-lg bg-gray-900 border border-gray-700 focus:border-green-400 outline-none"
+            className="w-full p-3 rounded-lg bg-gray-900 border border-gray-700 focus:border-green-400 outline-none transition"
           />
 
           <input
@@ -117,7 +129,7 @@ export default function Contact() {
             value={form.email}
             onChange={handleChange}
             required
-            className="w-full p-3 rounded-lg bg-gray-900 border border-gray-700 focus:border-green-400 outline-none"
+            className="w-full p-3 rounded-lg bg-gray-900 border border-gray-700 focus:border-green-400 outline-none transition"
           />
 
           <textarea
@@ -127,17 +139,18 @@ export default function Contact() {
             value={form.message}
             onChange={handleChange}
             required
-            className="w-full p-3 rounded-lg bg-gray-900 border border-gray-700 focus:border-green-400 outline-none"
+            className="w-full p-3 rounded-lg bg-gray-900 border border-gray-700 focus:border-green-400 outline-none transition"
           />
 
-          <button
+          <motion.button
+            whileTap={{ scale: 0.95 }}
             type="submit"
-            className="w-full bg-green-500 py-3 rounded-lg font-semibold hover:bg-green-600 transition"
+            className="w-full py-3 rounded-lg font-semibold bg-gradient-to-r from-green-400 to-cyan-400 text-black shadow-lg shadow-green-500/30 hover:scale-105 transition"
           >
             {loading ? "Sending..." : "Send Message 🚀"}
-          </button>
+          </motion.button>
 
-        </form>
+        </motion.form>
       </div>
     </section>
   );
