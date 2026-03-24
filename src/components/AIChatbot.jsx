@@ -354,38 +354,67 @@ const styles = `
 
 // ─── SVG Icons ────────────────────────────────────────────────────────────────
 const BotIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="3" y="11" width="18" height="10" rx="2"/>
-    <circle cx="12" cy="5" r="2"/>
-    <path d="M12 7v4"/>
-    <line x1="8" y1="16" x2="8" y2="16"/>
-    <line x1="16" y1="16" x2="16" y2="16"/>
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <rect x="3" y="11" width="18" height="10" rx="2" />
+    <circle cx="12" cy="5" r="2" />
+    <path d="M12 7v4" />
+    <line x1="8" y1="16" x2="8" y2="16" />
+    <line x1="16" y1="16" x2="16" y2="16" />
   </svg>
 );
 const SendIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-    <line x1="22" y1="2" x2="11" y2="13"/>
-    <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <line x1="22" y1="2" x2="11" y2="13" />
+    <polygon points="22 2 15 22 11 13 2 9 22 2" />
   </svg>
 );
 const TrashIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <polyline points="3 6 5 6 21 6"/>
-    <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
-    <path d="M10 11v6"/><path d="M14 11v6"/>
-    <path d="M9 6V4h6v2"/>
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <polyline points="3 6 5 6 21 6" />
+    <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+    <path d="M10 11v6" />
+    <path d="M14 11v6" />
+    <path d="M9 6V4h6v2" />
   </svg>
 );
 const CloseIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-    <line x1="18" y1="6" x2="6" y2="18"/>
-    <line x1="6" y1="6" x2="18" y2="18"/>
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <line x1="18" y1="6" x2="6" y2="18" />
+    <line x1="6" y1="6" x2="18" y2="18" />
   </svg>
 );
 
 // ─── Main Component ───────────────────────────────────────────────────────────
 export default function AIChatbot() {
-  const [open, setOpen]       = useState(false);
+  const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -393,11 +422,13 @@ export default function AIChatbot() {
     try {
       const saved = localStorage.getItem("arpit_chat_history");
       return saved ? JSON.parse(saved) : [];
-    } catch { return []; }
+    } catch {
+      return [];
+    }
   });
 
   const chatEndRef = useRef(null);
-  const inputRef   = useRef(null);
+  const inputRef = useRef(null);
 
   useEffect(() => {
     localStorage.setItem("arpit_chat_history", JSON.stringify(chat));
@@ -419,41 +450,31 @@ export default function AIChatbot() {
   ];
 
   const sendMessage = async (text = message) => {
-    const query = typeof text === "string" ? text.replace(/^[^\w]+/, "").trim() : message.trim();
+    const query =
+      typeof text === "string"
+        ? text.replace(/^[^\w]+/, "").trim()
+        : message.trim();
     if (!query || loading) return;
 
-    setChat(prev => [...prev, { role: "user", text: query }]);
+    setChat((prev) => [...prev, { role: "user", text: query }]);
     setMessage("");
     setLoading(true);
 
     try {
-      const model = genAI.getGenerativeModel({
-        model: "gemini-2.5-flash",
-      });
-
-      const prompt = `
-You are Arpit Panwar's AI portfolio assistant.
-
-Portfolio Data:
-${JSON.stringify(portfolioData)}
-
-Instructions:
-- Answer questions only about Arpit.
-- Be professional and concise.
-
-User Question:
-${query}
-`;
-
-      const result = await model.generateContent(prompt);
       const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
       const prompt = `You are Arpit Panwar's AI portfolio assistant.\n\nPortfolio Data:\n${JSON.stringify(portfolioData)}\n\nInstructions:\n- Answer questions only about Arpit.\n- Be professional, concise, and friendly.\n\nUser Question:\n${query}`;
-      const result   = await model.generateContent(prompt);
+      const result = await model.generateContent(prompt);
       const response = result.response.text();
-      setChat(prev => [...prev, { role: "bot", text: response }]);
+      setChat((prev) => [...prev, { role: "bot", text: response }]);
     } catch (err) {
       console.error("Gemini Error:", err);
-      setChat(prev => [...prev, { role: "bot", text: "⚠️ AI limit reached. Please try again in a moment." }]);
+      setChat((prev) => [
+        ...prev,
+        {
+          role: "bot",
+          text: "⚠️ AI limit reached. Please try again in a moment.",
+        },
+      ]);
     }
 
     setLoading(false);
@@ -468,7 +489,10 @@ ${query}
   };
 
   const handleKey = (e) => {
-    if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
   };
 
   return (
@@ -477,7 +501,11 @@ ${query}
 
       {/* ── FAB ── */}
       {!open && (
-        <button className="chat-fab" onClick={() => setOpen(true)} aria-label="Open AI Chat">
+        <button
+          className="chat-fab"
+          onClick={() => setOpen(true)}
+          aria-label="Open AI Chat"
+        >
           <div className="fab-ping" />
           <BotIcon />
           <span>AI Bot</span>
@@ -487,19 +515,30 @@ ${query}
       {/* ── Window ── */}
       {open && (
         <div className="chat-window" role="dialog" aria-label="AI Chatbot">
-
           {/* Header */}
           <div className="chat-header">
-            <div className="avatar-orb"><BotIcon /></div>
+            <div className="avatar-orb">
+              <BotIcon />
+            </div>
             <div className="header-info">
               <div className="header-name">Arpit's AI Guide</div>
               <div className="header-status">● online · ready</div>
             </div>
             <div className="header-actions">
-              <button className="icon-btn" onClick={clearChat} title="Clear history" aria-label="Clear history">
+              <button
+                className="icon-btn"
+                onClick={clearChat}
+                title="Clear history"
+                aria-label="Clear history"
+              >
                 <TrashIcon />
               </button>
-              <button className="icon-btn" onClick={() => setOpen(false)} title="Close" aria-label="Close chat">
+              <button
+                className="icon-btn"
+                onClick={() => setOpen(false)}
+                title="Close"
+                aria-label="Close chat"
+              >
                 <CloseIcon />
               </button>
             </div>
@@ -511,12 +550,20 @@ ${query}
               <div className="empty-state">
                 <div className="empty-icon">🤖</div>
                 <div className="empty-title">Hey there! 👋</div>
-                <div className="empty-sub">Ask me anything about Arpit's<br/>skills, projects, or experience.</div>
+                <div className="empty-sub">
+                  Ask me anything about Arpit's
+                  <br />
+                  skills, projects, or experience.
+                </div>
               </div>
             )}
 
             {chat.map((c, i) => (
-              <div key={i} className={`msg-row ${c.role}`} style={{ animationDelay: `${Math.min(i * 0.03, 0.15)}s` }}>
+              <div
+                key={i}
+                className={`msg-row ${c.role}`}
+                style={{ animationDelay: `${Math.min(i * 0.03, 0.15)}s` }}
+              >
                 <div className={`bubble ${c.role}`}>{c.text}</div>
               </div>
             ))}
@@ -524,7 +571,9 @@ ${query}
             {loading && (
               <div className="typing-indicator">
                 <div className="typing-dots">
-                  <div className="dot" /><div className="dot" /><div className="dot" />
+                  <div className="dot" />
+                  <div className="dot" />
+                  <div className="dot" />
                 </div>
                 <span className="typing-text">thinking…</span>
               </div>
@@ -556,7 +605,7 @@ ${query}
                 placeholder="Ask about Arpit…"
                 value={message}
                 rows={1}
-                onChange={e => setMessage(e.target.value)}
+                onChange={(e) => setMessage(e.target.value)}
                 onKeyDown={handleKey}
                 disabled={loading}
               />
@@ -570,7 +619,6 @@ ${query}
               <SendIcon />
             </button>
           </div>
-
         </div>
       )}
     </div>
